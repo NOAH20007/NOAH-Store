@@ -1227,9 +1227,67 @@ h2 {
 }
 
 .receipt-card h2 {
+  margin-bottom: 0.25rem;
+  color: #fbbf24;
+  font-size: 1.75rem;
+}
+
+.payment-qr-container {
+  margin: 1.5rem auto;
+  padding: 1rem;
+  background: white;
+  border-radius: 20px;
+  width: fit-content;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.payment-qr-img {
+  width: 220px;
+  height: auto;
+  display: block;
+}
+
+.payment-qr-info {
+  margin-top: 0.75rem;
+  color: #111827;
+}
+
+.account-name {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.payment-amount {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #d32f2f;
+}
+
+.payment-instructions {
+  margin: 1.5rem 0;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  padding: 1rem;
+  background: rgba(251, 191, 36, 0.05);
+  border-left: 4px solid #fbbf24;
+  border-radius: 8px;
+}
+
+.payment-instructions p {
   margin-bottom: 0.5rem;
-  color: #00e676;
-  font-size: 2rem;
+  color: var(--text-main);
+}
+
+.accent-link {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.accent-link:hover {
+  text-decoration: underline;
 }
 
 .receipt-subtitle,

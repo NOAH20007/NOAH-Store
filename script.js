@@ -440,9 +440,18 @@ document.addEventListener("DOMContentLoaded", () => {
       `
         <div class="receipt-modal" id="receipt-modal" aria-hidden="true">
           <div class="receipt-card">
-            <div class="receipt-icon">✓</div>
-            <h2>Order Confirmed!</h2>
-            <p class="receipt-subtitle">Your top-up has been processed successfully.</p>
+            <div class="receipt-icon">➜</div>
+            <h2>Complete Payment</h2>
+            <p class="receipt-subtitle">Please scan the KHQR below to complete your top-up.</p>
+            
+            <div class="payment-qr-container">
+              <img src="assets/khqr.jpg" alt="KHQR Payment" class="payment-qr-img">
+              <div class="payment-qr-info">
+                <p class="account-name">VUTHY KHORN</p>
+                <p class="payment-amount" id="receipt-total-large">$ 0.00</p>
+              </div>
+            </div>
+
             <div class="receipt-list">
               <div class="receipt-row">
                 <span>Game</span>
@@ -456,17 +465,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span>Package</span>
                 <strong id="receipt-package">-</strong>
               </div>
-              <div class="receipt-row">
-                <span>Payment</span>
-                <strong id="receipt-payment">-</strong>
-              </div>
-              <div class="receipt-row receipt-total">
-                <span>Total Paid</span>
-                <strong id="receipt-total">-</strong>
-              </div>
             </div>
-            <p class="receipt-note">Credits will appear in your account within seconds.</p>
-            <button type="button" class="receipt-btn" id="receipt-close">Done</button>
+
+            <div class="payment-instructions">
+              <p>1. Scan the QR code and pay the exact amount.</p>
+              <p>2. Take a screenshot of your successful payment.</p>
+              <p>3. Send the screenshot to our <a href="https://t.me/yourtelegram" target="_blank" class="accent-link">Telegram Support</a> for instant processing.</p>
+            </div>
+
+            <button type="button" class="receipt-btn" id="receipt-close">I have paid</button>
           </div>
         </div>
       `,
@@ -501,8 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("receipt-game").textContent = game;
     document.getElementById("receipt-account").textContent = account;
     document.getElementById("receipt-package").textContent = packageName;
-    document.getElementById("receipt-payment").textContent = payment;
-    document.getElementById("receipt-total").textContent = total;
+    document.getElementById("receipt-total-large").textContent = total;
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
