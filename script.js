@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
       publisher: "Moonton",
       imageSrc: "assets/mobie.png",
       userIdLabel: "User ID",
-      zoneIdLabel: "Zone ID",
+      zoneIdLabel: "Server ID",
       needsZoneId: true,
       instructions:
         "To find your User ID, tap your avatar in the top left corner of the main screen. The User ID is located below your name (e.g., 12345678(1234)).",
@@ -319,10 +319,10 @@ document.addEventListener("DOMContentLoaded", () => {
       publisher: "Level Infinite",
       imageSrc: "assets/hornor.jpg",
       userIdLabel: "UID",
-      zoneIdLabel: "Zone ID",
+      zoneIdLabel: "Server ID",
       needsZoneId: true,
       instructions:
-        "To find your UID and Zone ID, tap on your avatar, go to Settings, and view your account details.",
+        "To find your UID and Server ID, tap on your avatar, go to Settings, and view your account details.",
       products: [
         { amount: "🪙 16 Tokens", price: 0.99, value: 0.99 },
         { amount: "🪙 80 Tokens", price: 4.99, value: 4.99 },
@@ -368,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
         userIdInputElem.placeholder = `Enter ${gameData.userIdLabel}`;
       }
 
-      // Toggle Zone ID Input
+      // Toggle Server ID Input
       const zoneIdContainer = document.getElementById("zoneIdContainer");
       const zoneIdLabelElem = document.querySelector('label[for="zoneId"]');
       const zoneIdInputElem = document.getElementById("zoneId");
@@ -634,7 +634,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (gameData.needsZoneId && !zoneId) {
         showValidationMessage(
-          `Please enter your ${gameData.zoneIdLabel || "Zone ID"} first.`,
+          `Please enter your ${gameData.zoneIdLabel || "Server ID"} first.`,
         );
         return;
       }
