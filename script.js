@@ -447,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <p class="receipt-subtitle">Please scan the KHQR below to complete your top-up.</p>
             
             <div class="payment-qr-container">
-              <img src="assets/khqr.jpg" alt="KHQR Payment" class="payment-qr-img">
+              <img src="assets/khqr.png" alt="KHQR Payment" class="payment-qr-img">
               <div class="payment-qr-info">
                 <p class="account-name">VUTHY KHORN</p>
                 <p class="payment-amount" id="receipt-total-large">$ 0.00</p>
