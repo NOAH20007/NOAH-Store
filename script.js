@@ -735,20 +735,17 @@ document.addEventListener("DOMContentLoaded", () => {
       usernameVerified = false;
       updateCheckoutState();
 
-      // Simulate API Call delay
+      // Confirm the ID has been entered
       setTimeout(() => {
         btnCheckUsername.textContent = "Check Username";
         btnCheckUsername.disabled = false;
 
-        // Simulate a successful check (In real app, this data comes from API)
-        const mockedUsername = "Player_" + userId.substring(0, 4);
-
-        displayUsername.textContent = mockedUsername;
+        displayUsername.textContent = userId + (zoneId ? ` (${zoneId})` : "");
         usernameResultWrapper.style.display = "block";
         usernameVerified = true;
 
         updateCheckoutState();
-      }, 1000);
+      }, 500);
     });
 
     // Reset verify state if user types in the box again
