@@ -432,6 +432,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }).format(number);
   };
 
+  let pendingOrderData = null;
+
   const ensureReceiptModal = () => {
     if (receiptModal || !checkoutPage) return receiptModal;
 
@@ -439,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "beforeend",
       `
         <div class="receipt-modal" id="receipt-modal" aria-hidden="true">
-          <div class="receipt-card">
+          <div class="receipt-card" id="receipt-payment-view">
             <div class="receipt-icon">➜</div>
             <h2>Complete Payment</h2>
             <p class="receipt-subtitle">Please scan the KHQR below to complete your top-up.</p>
@@ -473,19 +475,80 @@ document.addEventListener("DOMContentLoaded", () => {
               <p>3. Send the screenshot to our <a href="https://t.me/noahstore168" target="_blank" class="accent-link">Telegram Support</a> for instant processing.</p>
             </div>
 
-            <button type="button" class="receipt-btn" id="receipt-close">I have paid</button>
+            <button type="button" class="receipt-btn" id="receipt-submit">I have paid</button>
+            <p id="receipt-submit-error" style="color:#f87171;font-size:0.85rem;margin-top:0.5rem;display:none;text-align:center;"></p>
+          </div>
+
+          <div class="receipt-card" id="receipt-confirm-view" style="display:none;">
+            <div class="receipt-icon">✅</div>
+            <h2>Order Submitted!</h2>
+            <p class="receipt-subtitle">Your payment has been recorded. We'll process your top-up shortly.</p>
+            <div class="receipt-list" style="margin:1.25rem 0;">
+              <div class="receipt-row">
+                <span>Order ID</span>
+                <strong id="confirm-order-id" style="font-family:monospace;color:#a78bfa;"></strong>
+              </div>
+            </div>
+            <div class="payment-instructions">
+              <p>Save your Order ID to track your top-up status.</p>
+              <p>Send your payment screenshot to our <a href="https://t.me/noahstore168" target="_blank" class="accent-link">Telegram Support</a>.</p>
+            </div>
+            <a class="receipt-btn" id="receipt-track-btn" href="/track.html" style="display:block;text-align:center;text-decoration:none;margin-bottom:0.5rem;">Track My Order</a>
+            <button type="button" class="receipt-btn" id="receipt-close" style="background:rgba(255,255,255,0.07);color:#94a3b8;">Close</button>
           </div>
         </div>
       `,
     );
 
     receiptModal = document.getElementById("receipt-modal");
-    const closeButton = document.getElementById("receipt-close");
 
+    const submitButton = document.getElementById("receipt-submit");
+    if (submitButton) {
+      submitButton.addEventListener("click", async () => {
+        if (!pendingOrderData) return;
+        submitButton.textContent = "Submitting...";
+        submitButton.disabled = true;
+        const errEl = document.getElementById("receipt-submit-error");
+        errEl.style.display = "none";
+
+        try {
+          const res = await fetch("/api/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pendingOrderData),
+          });
+          const data = await res.json();
+          if (res.ok && data.order) {
+            document.getElementById("receipt-payment-view").style.display = "none";
+            document.getElementById("receipt-confirm-view").style.display = "block";
+            document.getElementById("confirm-order-id").textContent = data.order.order_id;
+            const trackBtn = document.getElementById("receipt-track-btn");
+            if (trackBtn) trackBtn.href = "/track.html?id=" + data.order.order_id;
+          } else {
+            errEl.textContent = data.error || "Failed to submit order. Please contact us on Telegram.";
+            errEl.style.display = "block";
+            submitButton.textContent = "I have paid";
+            submitButton.disabled = false;
+          }
+        } catch (e) {
+          errEl.textContent = "Network error. Please try again or contact us on Telegram.";
+          errEl.style.display = "block";
+          submitButton.textContent = "I have paid";
+          submitButton.disabled = false;
+        }
+      });
+    }
+
+    const closeButton = document.getElementById("receipt-close");
     if (closeButton) {
       closeButton.addEventListener("click", () => {
         receiptModal.classList.remove("is-open");
         receiptModal.setAttribute("aria-hidden", "true");
+        document.getElementById("receipt-payment-view").style.display = "block";
+        document.getElementById("receipt-confirm-view").style.display = "none";
+        const submitBtn = document.getElementById("receipt-submit");
+        if (submitBtn) { submitBtn.textContent = "I have paid"; submitBtn.disabled = false; }
+        pendingOrderData = null;
       });
     }
 
@@ -494,6 +557,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === receiptModal) {
           receiptModal.classList.remove("is-open");
           receiptModal.setAttribute("aria-hidden", "true");
+          document.getElementById("receipt-payment-view").style.display = "block";
+          document.getElementById("receipt-confirm-view").style.display = "none";
+          pendingOrderData = null;
         }
       });
     }
@@ -702,6 +768,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const paymentName =
         selectedPayment.querySelector(".payment-name")?.textContent?.trim() ||
         "-";
+
+      pendingOrderData = {
+        game: gameData.title,
+        gameKey: currentGameId,
+        userId,
+        zoneId: zoneId || null,
+        username: verifiedName,
+        packageName,
+        price: selectedPrice,
+        paymentMethod: paymentName,
+      };
 
       showReceiptModal({
         game: gameData.title,

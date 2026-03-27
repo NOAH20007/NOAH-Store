@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track Order | NOAH Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet" />
+    <style>
+      .track-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6rem 1rem 3rem;
+        background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.15) 0%, transparent 60%);
+      }
+      .track-card {
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        width: 100%;
+        max-width: 480px;
+        backdrop-filter: blur(20px);
+      }
+      .track-card h2 { font-size: 1.6rem; margin-bottom: 0.4rem; }
+      .track-card h2 span { color: #8b5cf6; }
+      .track-card p.subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 1.75rem; }
+      .track-form { display: flex; gap: 0.5rem; }
+      .track-input {
+        flex: 1;
+        background: rgba(255,255,255,0.07);
+        border: 1px solid rgba(255,255,255,0.15);
+        border-radius: 10px;
+        color: #e0e6f0;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .track-input::placeholder { text-transform: none; letter-spacing: 0; color: #475569; }
+      .track-input:focus { border-color: #8b5cf6; }
+      .btn-track {
+        background: linear-gradient(135deg, #8b5cf6, #6366f1);
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .btn-track:hover { opacity: 0.85; }
+      .order-result {
+        margin-top: 2rem;
+        display: none;
+      }
+      .order-result.visible { display: block; }
+      .result-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.25rem;
+      }
+      .result-order-id { font-family: monospace; color: #a78bfa; font-weight: 700; font-size: 1.1rem; }
+      .status-badge {
+        padding: 0.3rem 0.9rem;
+        border-radius: 20px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .status-pending { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+      .status-processing { background: rgba(96,165,250,0.15); color: #60a5fa; border: 1px solid rgba(96,165,250,0.3); }
+      .status-completed { background: rgba(74,222,128,0.15); color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+      .status-rejected { background: rgba(248,113,113,0.15); color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+      .result-rows { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+      .result-row { display: flex; justify-content: space-between; font-size: 0.9rem; }
+      .result-row span { color: #94a3b8; }
+      .result-row strong { text-align: right; max-width: 55%; }
+      .divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 1rem 0; }
+      .status-msg { text-align: center; padding: 1rem; font-size: 0.88rem; }
+      .status-msg.pending { color: #facc15; }
+      .status-msg.processing { color: #60a5fa; }
+      .status-msg.completed { color: #4ade80; }
+      .status-msg.rejected { color: #f87171; }
+      .error-msg { color: #f87171; margin-top: 1rem; font-size: 0.9rem; text-align: center; display: none; }
+      .error-msg.visible { display: block; }
+      .back-link { display: inline-block; margin-top: 1.5rem; color: #8b5cf6; text-decoration: none; font-size: 0.88rem; }
+      .back-link:hover { text-decoration: underline; }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="logo"><h1><a href="/" style="text-decoration:none;color:inherit;">NOAH<span>Store</span></a></h1></div>
+      <nav class="nav-links">
+        <a href="/">Home</a>
+        <a href="/#games">Games</a>
+        <a href="track.html" class="active">Track Order</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="https://t.me/noahstore168" target="_blank" class="btn-login btn-telegram">Telegram</a>
+        <div class="hamburger" id="mobile-menu"><span class="bar"></span><span class="bar"></span><span class="bar"></span></div>
+      </div>
+    </header>
+
+    <section class="track-section">
+      <div class="track-card">
+        <h2>Track Your <span>Order</span></h2>
+        <p class="subtitle">Enter your Order ID to check the current status of your top-up.</p>
+
+        <div class="track-form">
+          <input type="text" class="track-input" id="orderIdInput" placeholder="e.g. NS-ABCD1234" maxlength="11" />
+          <button class="btn-track" id="btnTrack">Track</button>
+        </div>
+
+        <div class="error-msg" id="errorMsg"></div>
+
+        <div class="order-result" id="orderResult">
+          <div class="result-header">
+            <span class="result-order-id" id="resOrderId"></span>
+            <span class="status-badge" id="resStatusBadge"></span>
+          </div>
+          <hr class="divider" />
+          <ul class="result-rows">
+            <li class="result-row"><span>Game</span><strong id="resGame"></strong></li>
+            <li class="result-row"><span>Package</span><strong id="resPackage"></strong></li>
+            <li class="result-row"><span>Amount</span><strong id="resPrice"></strong></li>
+            <li class="result-row"><span>Payment</span><strong id="resPayment"></strong></li>
+            <li class="result-row"><span>Submitted</span><strong id="resDate"></strong></li>
+          </ul>
+          <hr class="divider" />
+          <p class="status-msg" id="resMsg"></p>
+        </div>
+
+        <a href="/" class="back-link">← Back to Store</a>
+      </div>
+    </section>
+
+    <script>
+      const statusMessages = {
+        pending: "⏳ Your order has been received and is awaiting review.",
+        processing: "⚙️ We are currently processing your top-up. This usually takes a few minutes.",
+        completed: "✅ Your top-up has been delivered successfully! Enjoy the game!",
+        rejected: "❌ Unfortunately, your order could not be processed. Please contact us on Telegram for help.",
+      };
+
+      async function trackOrder() {
+        const input = document.getElementById("orderIdInput").value.trim().toUpperCase();
+        const errorEl = document.getElementById("errorMsg");
+        const resultEl = document.getElementById("orderResult");
+        errorEl.className = "error-msg";
+        resultEl.className = "order-result";
+
+        if (!input) {
+          errorEl.textContent = "Please enter your Order ID.";
+          errorEl.className = "error-msg visible";
+          return;
+        }
+
+        const btn = document.getElementById("btnTrack");
+        btn.textContent = "Checking...";
+        btn.disabled = true;
+
+        try {
+          const res = await fetch("/api/orders/track/" + encodeURIComponent(input));
+          const data = await res.json();
+          btn.textContent = "Track";
+          btn.disabled = false;
+
+          if (!res.ok) {
+            errorEl.textContent = data.error || "Order not found. Please double-check your Order ID.";
+            errorEl.className = "error-msg visible";
+            return;
+          }
+
+          const o = data.order;
+          document.getElementById("resOrderId").textContent = o.order_id;
+          const badge = document.getElementById("resStatusBadge");
+          badge.textContent = o.status;
+          badge.className = "status-badge status-" + o.status;
+          document.getElementById("resGame").textContent = o.game;
+          document.getElementById("resPackage").textContent = o.package_name;
+          document.getElementById("resPrice").textContent = "$" + parseFloat(o.price).toFixed(2);
+          document.getElementById("resPayment").textContent = o.payment_method;
+          document.getElementById("resDate").textContent = new Date(o.created_at).toLocaleString();
+          const msgEl = document.getElementById("resMsg");
+          msgEl.textContent = statusMessages[o.status] || "";
+          msgEl.className = "status-msg " + o.status;
+          resultEl.className = "order-result visible";
+        } catch (e) {
+          btn.textContent = "Track";
+          btn.disabled = false;
+          errorEl.textContent = "Network error. Please try again.";
+          errorEl.className = "error-msg visible";
+        }
+      }
+
+      document.getElementById("btnTrack").addEventListener("click", trackOrder);
+      document.getElementById("orderIdInput").addEventListener("keyup", e => {
+        if (e.key === "Enter") trackOrder();
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const prefill = urlParams.get("id");
+      if (prefill) {
+        document.getElementById("orderIdInput").value = prefill.toUpperCase();
+        trackOrder();
+      }
+    </script>
+  </body>
+</html>
