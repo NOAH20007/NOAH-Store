@@ -465,10 +465,10 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="receipt-card" id="receipt-payment-view">
             <div class="receipt-icon">➜</div>
             <h2>Complete Payment</h2>
-            <p class="receipt-subtitle">Please scan the KHQR below to complete your top-up.</p>
+            <p class="receipt-subtitle" id="receipt-subtitle">Please scan the QR code below to complete your top-up.</p>
             
             <div class="payment-qr-container">
-              <img src="assets/khqr.png" alt="KHQR Payment" class="payment-qr-img">
+              <img src="assets/khqr.png" alt="Payment QR" class="payment-qr-img" id="receipt-qr-img">
               <div class="payment-qr-info">
                 <p class="account-name">VUTHY KHORN</p>
                 <p class="payment-amount" id="receipt-total-large">$ 0.00</p>
@@ -596,6 +596,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("receipt-account").textContent = account;
     document.getElementById("receipt-package").textContent = packageName;
     document.getElementById("receipt-total-large").textContent = total;
+
+    const isAba = payment && payment.toLowerCase().includes("aba");
+    const qrImg = document.getElementById("receipt-qr-img");
+    const subtitle = document.getElementById("receipt-subtitle");
+
+    if (isAba) {
+      qrImg.src = "images-events/aba.png";
+      qrImg.alt = "ABA Pay QR";
+      subtitle.textContent = "Please scan the ABA Pay QR code below to complete your top-up.";
+    } else {
+      qrImg.src = "assets/khqr.png";
+      qrImg.alt = "KHQR Payment";
+      subtitle.textContent = "Please scan the KHQR code below to complete your top-up.";
+    }
 
     modal.classList.add("is-open");
     modal.setAttribute("aria-hidden", "false");
