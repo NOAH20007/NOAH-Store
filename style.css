@@ -12,10 +12,13 @@
   --text-muted: #94a3b8;
 
   /* Neons & Accents */
-  --primary: #8b5cf6; /* Violet */
+  --primary: #8b5cf6;
+  /* Violet */
   --primary-glow: rgba(139, 92, 246, 0.5);
-  --secondary: #ec4899; /* Pink */
-  --accent: #3b82f6; /* Blue */
+  --secondary: #ec4899;
+  /* Pink */
+  --accent: #3b82f6;
+  /* Blue */
 
   /* Layout */
   --nav-height: 80px;
@@ -23,8 +26,8 @@
   --border-radius-sm: 8px;
 
   /* Fonts */
-    --font-heading: 'Outfit', sans-serif;
-    --font-body: 'Outfit', sans-serif;
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Outfit', sans-serif;
 }
 
 /* Base Styles & Resets */
@@ -43,7 +46,8 @@ body {
   background-color: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
-  overflow-x: hidden; /* Prevent horizontal scroll from glowing orbs */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll from glowing orbs */
 }
 
 a {
@@ -59,7 +63,10 @@ ul {
 /* =========================================
    Typography
    ========================================= */
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: var(--font-heading);
   font-weight: 800;
 }
@@ -117,7 +124,7 @@ h2 {
 }
 
 .nav-links a::after {
-    content: '';
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -127,11 +134,13 @@ h2 {
   transition: width 0.3s ease;
 }
 
-.nav-links a:hover::after, .nav-links a.active::after {
+.nav-links a:hover::after,
+.nav-links a.active::after {
   width: 100%;
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active {
   color: var(--text-main);
 }
 
@@ -171,7 +180,7 @@ h2 {
   font-family: var(--font-body);
   font-size: 1rem;
   cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   box-shadow: 0 4px 15px var(--primary-glow);
   display: inline-flex;
   align-items: center;
@@ -224,7 +233,7 @@ h2 {
   width: 100%;
   max-width: 1200px;
   border-radius: var(--border-radius-lg);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -239,20 +248,24 @@ h2 {
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  scrollbar-width: none; /* Hide scrollbar Firefox */
+  scrollbar-width: none;
+  /* Hide scrollbar Firefox */
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
 }
 
 .carousel-track::-webkit-scrollbar {
-  display: none; /* Hide scrollbar Chrome/Safari */
+  display: none;
+  /* Hide scrollbar Chrome/Safari */
 }
 
 .carousel-slide {
-  flex: 0 0 100%; /* Take up full width of container */
+  flex: 0 0 100%;
+  /* Take up full width of container */
   width: 100%;
-  aspect-ratio: 21/9; /* Wide banner style */
+  aspect-ratio: 21/9;
+  /* Wide banner style */
   scroll-snap-align: center;
   position: relative;
 }
@@ -262,15 +275,16 @@ h2 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  pointer-events: none; /* Prevents ghost-dragging the image when you swipe */
+  pointer-events: none;
+  /* Prevents ghost-dragging the image when you swipe */
 }
 
 /* Add a gradient overlay to the slide so images pop */
 .carousel-slide::after {
-    content: '';
+  content: '';
   position: absolute;
   inset: 0;
-    background: linear-gradient(135deg, rgba(30,30,40,0.6), rgba(30,30,40,0.1));
+  background: linear-gradient(135deg, rgba(30, 30, 40, 0.6), rgba(30, 30, 40, 0.1));
   pointer-events: none;
 }
 
@@ -291,7 +305,7 @@ h2 {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
   cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .dot.active {
@@ -307,8 +321,10 @@ h2 {
   .hero {
     min-height: auto;
   }
+
   .carousel-slide {
-    aspect-ratio: 16/9; /* Less wide on mobile */
+    aspect-ratio: 16/9;
+    /* Less wide on mobile */
   }
 }
 
@@ -350,8 +366,13 @@ h2 {
 }
 
 @keyframes float {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(30px) scale(1.1); }
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(30px) scale(1.1);
+  }
 }
 
 /* =========================================
@@ -387,20 +408,21 @@ h2 {
   border-radius: var(--border-radius-lg);
   overflow: hidden;
   backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   display: flex;
   flex-direction: column;
 }
 
 .game-card:hover {
   transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.2);
   border-color: rgba(139, 92, 246, 0.3);
 }
 
 .game-img-container {
   position: relative;
-  aspect-ratio: 1/1; /* Square aspect ratio to fit full images better */
+  aspect-ratio: 1/1;
+  /* Square aspect ratio to fit full images better */
   overflow: hidden;
   background: rgba(0, 0, 0, 0.3);
 }
@@ -414,9 +436,12 @@ h2 {
 }
 
 .game-img-container::after {
-    content: '';
+  content: '';
   position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   transition: background 0.3s ease;
   pointer-events: none;
 }
@@ -623,7 +648,8 @@ h2 {
   max-width: 300px;
 }
 
-.footer-links, .footer-contact {
+.footer-links,
+.footer-contact {
   flex: 1;
   min-width: 200px;
 }
@@ -715,9 +741,11 @@ h2 {
   .hamburger.active .bar:nth-child(2) {
     opacity: 0;
   }
+
   .hamburger.active .bar:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
   }
+
   .hamburger.active .bar:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
@@ -731,12 +759,15 @@ h2 {
   .hero-title {
     font-size: 2.2rem;
   }
+
   .hero-subtitle {
     font-size: 1rem;
   }
+
   h2 {
     font-size: 2rem;
   }
+
   .game-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
@@ -784,7 +815,8 @@ h2 {
 
 .game-banner {
   width: 100%;
-  aspect-ratio: 1/1; /* Match the front page ratio */
+  aspect-ratio: 1/1;
+  /* Match the front page ratio */
   position: relative;
   display: flex;
   align-items: center;
@@ -802,9 +834,11 @@ h2 {
 }
 
 .game-banner::after {
-    content: '';
+  content: '';
   position: absolute;
-    bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   height: 50%;
   background: linear-gradient(to top, rgba(30, 41, 59, 1), transparent);
 }
@@ -957,13 +991,15 @@ h2 {
 }
 
 /* Product & Payment Grid */
-.product-grid, .payment-grid {
+.product-grid,
+.payment-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
 }
 
-.product-item, .payment-item {
+.product-item,
+.payment-item {
   position: relative;
   background: rgba(30, 41, 59, 0.5);
   border: 1px solid rgba(148, 163, 184, 0.1);
@@ -1003,8 +1039,9 @@ h2 {
 }
 
 /* Corner checkmark for selected */
-.product-item.selected::before, .payment-item.selected::before {
-    content: '✓';
+.product-item.selected::before,
+.payment-item.selected::before {
+  content: '✓';
   position: absolute;
   top: -5px;
   right: -5px;
@@ -1022,18 +1059,21 @@ h2 {
   transform: rotate(45deg);
 }
 
-.product-amount, .payment-name {
+.product-amount,
+.payment-name {
   font-weight: 600;
   font-size: 1.05rem;
   margin-bottom: 0.5rem;
 }
 
-.product-price, .payment-price {
+.product-price,
+.payment-price {
   color: var(--text-muted);
   font-size: 0.95rem;
 }
 
-.product-item.selected .product-price, .payment-item.selected .payment-price {
+.product-item.selected .product-price,
+.payment-item.selected .payment-price {
   color: var(--text-main);
 }
 
@@ -1179,20 +1219,20 @@ h2 {
   font-family: var(--font-heading);
   cursor: pointer;
   transition: all 0.3s ease;
-    box-shadow: 0 5px 20px var(--primary-glow);
+  box-shadow: 0 5px 20px var(--primary-glow);
 }
 
 .btn-buy:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 8px 25px var(--primary-glow);
+  box-shadow: 0 8px 25px var(--primary-glow);
 }
 
 .btn-buy:disabled {
-    background: #334155;
-    color: #94a3b8;
-    box-shadow: none;
-    cursor: not-allowed;
-    transform: none;
+  background: #334155;
+  color: #94a3b8;
+  box-shadow: none;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .receipt-modal {
@@ -1217,8 +1257,15 @@ h2 {
 }
 
 @keyframes modal-enter {
-  from { opacity: 0; transform: scale(0.9) translateY(20px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 .receipt-modal.is-open {
@@ -1282,9 +1329,23 @@ h2 {
 }
 
 @keyframes qr-pulse {
-  0% { transform: scale(1); opacity: 0.6; filter: blur(4px); }
-  50% { transform: scale(1.02); opacity: 0.8; filter: blur(8px); }
-  100% { transform: scale(1); opacity: 0.6; filter: blur(4px); }
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+    filter: blur(4px);
+  }
+
+  50% {
+    transform: scale(1.02);
+    opacity: 0.8;
+    filter: blur(8px);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+    filter: blur(4px);
+  }
 }
 
 .payment-qr-img {
@@ -1409,85 +1470,86 @@ h2 {
 
 /* Responsiveness for Checkout */
 @media (max-width: 900px) {
-    .checkout-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .checkout-sidebar .game-info-card {
-        position: relative;
-        top: 0;
-    }
+  .checkout-container {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-sidebar .game-info-card {
+    position: relative;
+    top: 0;
+  }
 }
 
 @media (max-width: 600px) {
-    .form-group-row {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .checkout-action-card {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-    }
+  .form-group-row {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .checkout-summary {
-        width: 100%;
-    }
+  .checkout-action-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
 
-    .checkout-summary-row {
-        align-items: flex-start;
-    }
-    
-    .btn-buy {
-        width: 100%;
-    }
+  .checkout-summary {
+    width: 100%;
+  }
 
-    .receipt-card {
-        padding: 1.5rem;
-    }
+  .checkout-summary-row {
+    align-items: flex-start;
+  }
 
-    .receipt-row {
-        flex-direction: column;
-        gap: 0.35rem;
-    }
+  .btn-buy {
+    width: 100%;
+  }
 
-    .receipt-row strong {
-        text-align: left;
-    }
-    
-    .product-grid, .payment-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
+  .receipt-card {
+    padding: 1.5rem;
+  }
 
-    .payment-grid {
-        grid-template-columns: 1fr;
-    }
+  .receipt-row {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
 
-    .payment-item {
-        padding: 1.15rem;
-    }
+  .receipt-row strong {
+    text-align: left;
+  }
 
-    .payment-option {
-        gap: 0.9rem;
-    }
+  .product-grid,
+  .payment-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
 
-    .payment-logo-wrap {
-        width: 56px;
-        height: 56px;
-        border-radius: 14px;
-    }
+  .payment-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .payment-name {
-        font-size: 1.15rem;
-    }
+  .payment-item {
+    padding: 1.15rem;
+  }
 
-    .payment-subtitle {
-        font-size: 0.9rem;
-    }
+  .payment-option {
+    gap: 0.9rem;
+  }
 
-    .payment-price {
-        min-width: 58px;
-        font-size: 1.35rem;
-    }
+  .payment-logo-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .payment-name {
+    font-size: 1.15rem;
+  }
+
+  .payment-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .payment-price {
+    min-width: 58px;
+    font-size: 1.35rem;
+  }
 }
