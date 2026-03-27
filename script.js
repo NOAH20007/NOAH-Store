@@ -470,7 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="payment-instructions">
               <p>1. Scan the QR code and pay the exact amount.</p>
               <p>2. Take a screenshot of your successful payment.</p>
-              <p>3. Send the screenshot to our <a href="https://t.me/yourtelegram" target="_blank" class="accent-link">Telegram Support</a> for instant processing.</p>
+              <p>3. Send the screenshot to our <a href="https://t.me/noahstore168" target="_blank" class="accent-link">Telegram Support</a> for instant processing.</p>
             </div>
 
             <button type="button" class="receipt-btn" id="receipt-close">I have paid</button>
