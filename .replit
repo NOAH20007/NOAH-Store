@@ -37,3 +37,8 @@ externalPort = 80
 deploymentTarget = "autoscale"
 publicDir = "."
 run = ["node", "backend/server.js"]
+
+[userenv]
+
+[userenv.shared]
+ADMIN_PASSWORD = "2HvnPDcLXeSYjp"
