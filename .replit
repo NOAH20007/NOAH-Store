@@ -40,3 +40,5 @@ run = ["node", "backend/server.js"]
 [userenv]
 
 [userenv.shared]
+
+[userenv.production]
