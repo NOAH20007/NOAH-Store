@@ -394,10 +394,16 @@ document.addEventListener("DOMContentLoaded", () => {
         prodItem.setAttribute("data-price", prod.value);
         if (prod.type) prodItem.setAttribute("data-type", prod.type);
 
-        prodItem.innerHTML = `
-                    <div class="product-amount">${prod.amount}</div>
-                    <div class="product-price">$ ${prod.price}</div>
-                `;
+        const amountDiv = document.createElement("div");
+        amountDiv.className = "product-amount";
+        amountDiv.textContent = prod.amount;
+
+        const priceDiv = document.createElement("div");
+        priceDiv.className = "product-price";
+        priceDiv.textContent = `$ ${prod.price}`;
+
+        prodItem.appendChild(amountDiv);
+        prodItem.appendChild(priceDiv);
 
         productGrid.appendChild(prodItem);
       });
